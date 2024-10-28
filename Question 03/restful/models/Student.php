@@ -1,7 +1,7 @@
 <?php
 class Student {
     private $conn;
-    private $table_name = "horizonstudent";
+    private $table_name = "horizonstudents";
 
     public $id;
     public $indexNo;
@@ -22,7 +22,7 @@ class Student {
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
 
-        echo json_encode($$stmt->fetchAll(PDO::FETCH_ASSOC));
+        echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
     }
 
     public function readSingle() {
@@ -55,6 +55,22 @@ class Student {
     }
 
     public function update() {
+        $query = "UPDATE $this->table_name SET first_name=:fname, last_name=:lname, city=:city, district=:district province=:province, email_address=:email, mobile_number=:contact WHERE id=:id";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':id', $this->id);
+        $stmt->bindParam(':fname', $this->firstName);
+        $stmt->bindParam(':lname', $this->lastName);
+        $stmt->bindParam(':city', $this->city);
+        $stmt->bindParam(':district', $this->district);
+        $stmt->bindParam(':province', $this->province);
+        $stmt->bindParam(':email', $this->email);
+        $stmt->bindParam(':contact', $this->contact);
+
+        if ($stmt->execute()) {
+            echo json_encode(["message" => "Student updated successfully."]);
+        } else {
+            echo json_encode(["message" => "Student could not be updated."]);
+        }
     }
 
     public function delete() {
