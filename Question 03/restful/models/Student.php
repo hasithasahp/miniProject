@@ -18,9 +18,20 @@ class Student {
     }
 
     public function read() {
+        $query = "SELECT * FROM $this->table_name";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+
+        echo json_encode($$stmt->fetchAll(PDO::FETCH_ASSOC));
     }
 
     public function readSingle() {
+        $query = "SELECT * FROM $this->table_name WHERE id=:id LIMIT 0,1";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':id', $this->id);
+        $stmt->execute();
+
+        echo json_encode($stmt->fetch(PDO::FETCH_ASSOC) ?: []);
     }
 
     public function create() {

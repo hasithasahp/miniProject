@@ -23,7 +23,12 @@ $students = new Student($db);
 $method = $_SERVER['REQUEST_METHOD'];
 switch ($method) {
     case 'GET':
-        echo 'Retrive students';
+        if(isset($_GET['id'])) {
+            $students->id = $_GET['id'];
+            $students->readSingle();
+        } else {
+            $students->read();
+        }
         break;
         
     case 'POST':
