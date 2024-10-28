@@ -32,7 +32,26 @@ switch ($method) {
         break;
         
     case 'POST':
-        echo 'Create new Student';
+        $data = json_decode(file_get_contents("php://input"), true);
+
+        if($data) {
+            $students->firstName = $data['first_name'] ?? null;
+            $students->lastName = $data['last_name'] ?? null;
+            $students->city = $data['city'] ?? null;
+            $students->district = $data['district'] ?? null;
+            $students->province = $data['province'] ?? null;
+            $students->email = $data['email_address'] ?? null;
+            $students->contact = $data['mobile_number'] ?? null;
+
+            $students->create();
+            echo json_encode([
+                "message" => "Data received successfully",
+                "name" => $students->firstName . " " . $students->lastName,
+                "email" => $students->email
+            ]);
+        } else {
+            echo json_encode(["error" => "Invalid JSON input"]);
+        }
         break;
         
     case 'PUT':
