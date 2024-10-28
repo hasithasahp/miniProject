@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Country Info</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .flag {
+            width: 100px;
+            height: auto;
+        }
+        .map-link {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <h2 class="text-center">Select a Country</h2>
+        
+        <!-- Dropdown for Countries -->
+        <select id="countrySelect" class="form-control mb-4">
+            <option value="">Select Country</option>
+        </select>
+        
+        <!-- Display Country Info -->
+        <div id="countryInfo" class="card p-4" style="display:none;">
+            <img id="flag" class="flag mb-3" alt="Country Flag">
+            <p><strong>Official Name:</strong> <span id="name"></span></p>
+            <p><strong>Capital:</strong> <span id="capital"></span></p>
+            <p><strong>Region:</strong> <span id="region"></span></p>
+            <p><strong>Subregion:</strong> <span id="subregion"></span></p>
+            <p><strong>Currencies:</strong> <span id="currencies"></span></p>
+            <p><strong>Country Code:</strong> <span id="code"></span></p>
+            <p><strong>Population:</strong> <span id="population"></span></p>
+            <p><strong>Area:</strong> <span id="area"></span> km²</p>
+            <p><strong>Borders:</strong> <span id="borders"></span></p>
+            <p><strong>Google Maps:</strong> <a id="googleMap" href="#" class="map-link" target="_blank">View Map</a></p>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        (g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})({
+            key: "AIzaSyDUp40lybgxUoh6I5Koz0nG_wZzey8TT98",
+            v: "weekly",
+            // Use the 'v' parameter to indicate the version to use (weekly, beta, alpha, etc.).
+            // Add other bootstrap parameters as needed, using camel case.
+        });
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
