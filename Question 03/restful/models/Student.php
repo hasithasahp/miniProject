@@ -35,17 +35,18 @@ class Student {
     }
 
     public function create() {
-        $query = `INSERT INTO 
-            $this->table (first_name, last_name, city, district, province, email_address, mobile_number) 
-            VALUES (:fname, :lname, :city, :district, :province, :email, :contact)`;
+        $query = "INSERT INTO 
+            $this->table_name (id, index_no, first_name, last_name, city, district, province, email_address, mobile_number) 
+            VALUES ('', :idno, :fname, :lname, :city, :district, :province, :email, :contact)";
         $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':idno', $this->indexNo);
         $stmt->bindParam(':fname', $this->firstName);
         $stmt->bindParam(':lname', $this->lastName);
         $stmt->bindParam(':city', $this->city);
         $stmt->bindParam(':district', $this->district);
         $stmt->bindParam(':province', $this->province);
         $stmt->bindParam(':email', $this->email);
-        $stmt->bindParam(':mobile', $this->contact);
+        $stmt->bindParam(':contact', $this->contact);
 
         if ($stmt->execute()) {
             echo json_encode(["message" => "Student created successfully."]);
